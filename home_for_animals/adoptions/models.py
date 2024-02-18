@@ -1,14 +1,13 @@
 from django.db import models
-
-from apps.users.models import User
-from apps.pets.models import Pet
+from home_for_animals.user.models import UserProfile
+from home_for_animals.pets.models import Pet
 
 class AdoptionRequest(models.Model):
     """
     领养申请
     """
-    # ?
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='用户')
+
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name='用户')
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, verbose_name='宠物')
     request_date = models.DateTimeField(auto_now_add=True, verbose_name='申请日期')
     status = models.CharField(max_length=10,
