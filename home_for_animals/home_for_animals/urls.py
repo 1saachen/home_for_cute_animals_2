@@ -14,14 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include  # 注意 include 的导入
+from django.urls import path, include
+
 
 urlpatterns = [
    # path('admin/', admin.site.urls),
     path('pets/', include('pets.urls')),  # 包含 pets 应用的 urls.py 文件
-    path('UserRegister/', include('pets.urls')),  # 包含register应用的 urls.py 文件
-    path('UserLogin/', include('pets.urls')),  # 包含Login应用的 urls.py 文件
-
-
-
+    path('UserRegister/', include('UserRegister.urls')),  # 使用pets应用中的UserRegister视图函数
+    path('wechat_login/',include('wechat_login.urls') ),  # 使用pets应用中的wechat_login视图函数
 ]

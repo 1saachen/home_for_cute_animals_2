@@ -17,6 +17,9 @@ class Adoption(models.Model):
     adopted_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('approved', 'Approved'), ('rejected', 'Rejected')], default='pending')
 
+    class Meta:
+        unique_together = ('pet', 'user')
+
 class Project(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -32,4 +35,4 @@ class Accounting(models.Model):
     donation_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('pet', 'user','donation', 'donation_date')
+       unique_together = ('donation', 'donation_date')

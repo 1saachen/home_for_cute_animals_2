@@ -1,3 +1,5 @@
+from django.shortcuts import redirect  # 导入 redirect
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, throttling
@@ -6,14 +8,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 from .models import User
-from .forms import RegisterForm, LoginForm  # 导入自定义的表单
-from .serializers import UserSerializer
+from .forms import UserRegisterForm, UserLoginForm  # 修改表单的导入
 from rest_framework.authtoken.views import ObtainAuthToken
 
 class UserRegistrationAPIView(APIView):
     def post(self, request):
         # 创建一个UserRegisterForm实例并将请求数据传递给它
-        form = RegisterForm(request.data)
+        form = UserRegisterForm(request.data)  # 使用正确的表单类
 
         # 检查表单是否有效
         if form.is_valid():
@@ -41,7 +42,7 @@ class UserRegistrationAPIView(APIView):
 
 class UserLoginAPIView(APIView):
     def post(self, request):
-        form = LoginForm(request.data)
+        form = UserLoginForm(request.data)  # 使用正确的表单类
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -57,7 +58,7 @@ class UserLoginAPIView(APIView):
     def get(self, request):
         if request.user.is_authenticated:
             logout(request)
-        return redirect("list")
+        return redirect("list")  # 使用 redirect 函数重定向
 
 class CustomThrottle(throttling.SimpleRateThrottle):
     scope = 'login_attempts'
@@ -82,9 +83,12 @@ class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
         if response.status_code == status.HTTP_200_OK:
-            token = Token.objects.get(key=response.data['token'])
-            token.created = timezone.now()
-            token.save()
+            try:
+                token = Token.objects.get(key=response.data['token'])
+                token.created = timezone.now()
+                token.save()
+            except KeyError:
+                pass  # 处理键错误异常
         return response
 
 
