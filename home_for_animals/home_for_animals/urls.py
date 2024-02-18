@@ -19,4 +19,9 @@ from django.urls import path, include  # 注意 include 的导入
 urlpatterns = [
    # path('admin/', admin.site.urls),
     path('pets/', include('pets.urls')),  # 包含 pets 应用的 urls.py 文件
+    path('UserRegister/', include('pets.urls')),  # 包含register应用的 urls.py 文件
+    path('UserLogin/', include('pets.urls')),  # 包含Login应用的 urls.py 文件
+
+
+
 ]
