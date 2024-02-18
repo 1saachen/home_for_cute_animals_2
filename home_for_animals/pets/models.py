@@ -31,5 +31,5 @@ class Accounting(models.Model):
     donation = models.ForeignKey(Donation, on_delete=models.CASCADE)
     donation_date = models.DateTimeField(auto_now_add=True)
 
-class Meta:
-    unique_together = ('pet', 'user','donation', 'donation_date')
+    class Meta:
+        unique_together = ('pet', 'user','donation', 'donation_date')
