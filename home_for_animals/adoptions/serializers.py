@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from .models import AdoptionRequest
-from home_for_animals.user.models import UserProfile
-from home_for_animals.pets.models import Pet
-
-class AdoptionRequestSerializer(serializers.ModelSerializer):
+from users.models import User
+from pets.models import Pet
+from users.serializers import UserProfileSerializer
+from pets.serializers import PetSerializer
+class AdoptionSerializer(serializers.ModelSerializer):
     user = UserProfileSerializer(read_only=True)
     pet = PetSerializer(read_only=True)
 
@@ -19,7 +20,7 @@ class AdoptionRequestSerializer(serializers.ModelSerializer):
 
     class UserProfileSerializer(serializers.ModelSerializer):
         class Meta:
-            model = UserProfile
+            model = User
             fields = ['id',
                       'real_name']
 
@@ -33,7 +34,7 @@ class AdoptionRequestSerializer(serializers.ModelSerializer):
         user_data = validated_data.pop('user')
         pet_data = validated_data.pop('pet')
 
-        user = UserProfile.objects.get(id=user_data['id'])
+        user = User.objects.get(id=user_data['id'])
         pet = Pet.objects.get(id=pet_data['id'])
 
         instance = AdoptionRequest.objects.create(user=user, pet=pet, **validated_data)

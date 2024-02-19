@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from home_for_animals.pets.models import Pet
+from pets.models import Pet
 from .models import AdoptionRequest
 from django.urls import reverse
 
