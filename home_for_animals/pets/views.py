@@ -3,13 +3,16 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Pet,Adoption
 from .serializers import PetSerializer,AdoptionSerializer
-from rest_framework import generics
+from rest_framework import generics,filters
 from django.urls import reverse_lazy
 from rest_framework.decorators import api_view
+from django_filters.rest_framework import DjangoFilterBackend
 
 class PetListCreate(generics.ListCreateAPIView):
     queryset = Pet.objects.all()
     serializer_class = PetSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['name', 'breed', 'region']
 
 
 class PetDetailUpdate(generics.RetrieveUpdateAPIView):
