@@ -42,4 +42,4 @@ class Accounting(models.Model):
     donation_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-       unique_together = ('donation', 'donation_date')
+       unique_together = (('donation', 'donation_date'),)
