@@ -8,6 +8,8 @@ class User(models.Model):
     gender = models.CharField(max_length=10, choices=[('male', '男'), ('female', '女'), ('unknown', '未知')], default='unknown')  # 用户性别，默认为未知
     created_at = models.DateTimeField(auto_now_add=True)  # 用户创建时间
 
+    class Meta:
+        db_table = 'wechat_user'
     def __str__(self):
         return self.openid
 

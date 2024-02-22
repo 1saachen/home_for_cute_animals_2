@@ -7,7 +7,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
-from .models import User
+from .models import UserRegister
 from .forms import UserRegisterForm, UserLoginForm  # 修改表单的导入
 from rest_framework.authtoken.views import ObtainAuthToken
 
@@ -24,16 +24,16 @@ class UserRegistrationAPIView(APIView):
             password = form.cleaned_data['password']
 
             # 检查用户名是否已经存在
-            if User.objects.filter(username=username).exists():
+            if UserRegister.objects.filter(username=username).exists():
                 return Response({'error': '用户名已存在。'}, status=status.HTTP_400_BAD_REQUEST)
 
             # 检查邮箱是否已经存在
-            if User.objects.filter(email=email).exists():
+            if UserRegister.objects.filter(email=email).exists():
                 return Response({'error': '邮箱已存在。'}, status=status.HTTP_400_BAD_REQUEST)
 
             # 创建用户
             hashed_password = make_password(password)
-            user = User.objects.create(username=username, email=email, password=hashed_password)
+            user = UserRegister.objects.create(username=username, email=email, password=hashed_password)
 
             return Response({'message': '用户注册成功。'}, status=status.HTTP_201_CREATED)
         else:

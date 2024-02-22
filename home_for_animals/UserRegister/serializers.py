@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import User
+from .models import UserRegister
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserRegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()
 
     class Meta:
-        model=User
+        model=UserRegister
         fields = ['id','username','password','email']

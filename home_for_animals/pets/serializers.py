@@ -9,7 +9,7 @@ class PetSerializer(serializers.ModelSerializer):
 class AdoptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Adoption
-        fields = ['id', 'pet', 'user', 'adopted_at', 'status']
+        fields = ['id', 'pet', 'user', 'adopted_at','request_date', 'status']
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:

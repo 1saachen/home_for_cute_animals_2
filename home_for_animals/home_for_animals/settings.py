@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'UserRegister',
     'wechat_login',
-     'adoptions',
 
 ]
 

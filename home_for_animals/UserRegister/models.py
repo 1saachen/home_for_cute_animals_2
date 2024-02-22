@@ -10,6 +10,9 @@ class CustomUser(AbstractUser):
     login_attempts = models.PositiveIntegerField(default=0)  # 记录登录尝试次数
     locked = models.BooleanField(default=False)  # 记录用户是否被锁定
 
+    class Meta:
+        db_table = 'custom_user'
+
     def increment_login_attempts(self):
         self.login_attempts += 1
         self.save()
@@ -22,16 +25,20 @@ class CustomUser(AbstractUser):
         Group,
         verbose_name=_('groups'),
         blank=True,
-        related_name='customuser_groups'
+        related_name='custom_user_groups'
     )
     user_permissions = models.ManyToManyField(
         Permission,
         verbose_name=_('user permissions'),
         blank=True,
-        related_name='customuser_user_permissions'
+        related_name='custom_user_user_permissions'
     )
 
 
-class User(models.Model):
+class UserRegister(models.Model):
     username=models.CharField(max_length=100, unique=True)
     password=models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'user_register'
+

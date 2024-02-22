@@ -1,4 +1,4 @@
-from adoptions.serializers import AdoptionSerializer
+from pets.serializers import AdoptionSerializer
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from .models import DonationRecord, User, VolunteerRecord

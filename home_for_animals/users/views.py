@@ -1,5 +1,5 @@
-from adoptions.models import AdoptionRequest
-from adoptions.serializers import AdoptionSerializer
+from pets.models import Adoption
+from pets.serializers import AdoptionSerializer
 from rest_framework import generics, mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -54,7 +54,7 @@ class UserViewSet(
         查看领养申请记录
         """
         user = request.user
-        adoption_requests = AdoptionRequest.objects.filter(user=user)
+        adoption_requests = Adoption.objects.filter(user=user)
         serializer = AdoptionSerializer(adoption_requests, many=True)
         return Response(serializer.data)
 

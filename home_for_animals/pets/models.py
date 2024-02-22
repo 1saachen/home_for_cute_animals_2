@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 class Pet(models.Model):
     name = models.CharField(max_length=100)
     avatar = models.ImageField(upload_to='pets_avatars/', null=True, blank=True)
@@ -22,6 +23,7 @@ class Adoption(models.Model):
     pet = models.ForeignKey(Pet, related_name='adoptions', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='adoptions', on_delete=models.CASCADE)
     adopted_at = models.DateTimeField(auto_now_add=True)
+    request_date = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('approved', 'Approved'), ('rejected', 'Rejected')], default='pending')
 
     class Meta:
