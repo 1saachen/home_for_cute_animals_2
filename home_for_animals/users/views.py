@@ -20,33 +20,32 @@ class UserViewSet(
     """
     queryset = User.objects.all()
     serializer_class = UserProfileSerializer
-    # lookup_field = 'id'
-    # 查看方式
+    lookup_field = 'id'
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
-        if instance == request.user:
-            serializer = self.get_serializer(instance)
-            return Response(serializer.data)
-        # else:  查看失败
+        if instance.id != request.user.id:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
     def update(self, request, *args, **kwargs):
-        """
-        用户更新信息
-        """
-        partial = kwargs.pop("partial", False)
+        partial = kwargs.pop('partial', False)
         instance = self.get_object()
-        if instance == request.user:
-            serializer = self.get_serializer(
-                instance, data=request.data, partial=partial
-            )
-            serializer.is_valid(raise_exception=True)
-            self.perform_update(serializer)
-            if getattr(instance, "_prefetched_objects_cache", None):
-                instance._prefetched_objects_cache = {}
-            return Response(serializer.data)
-        else:
-            return Response(status=status.HTTP_403_FORBIDDEN)  # 失败
+
+        if instance.id != request.user.id:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
+
+    def perform_update(self, serializer):
+        serializer.save()
+
 
     @action(detail=False, methods=["get"])
     def adoption_requests(self, request):

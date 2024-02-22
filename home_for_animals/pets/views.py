@@ -5,8 +5,10 @@ from .models import Pet,Adoption,Project,Accounting
 from .serializers import PetSerializer,AdoptionSerializer,DonationSerializer,AccountingSerializer,ProjectSerializer
 from rest_framework import generics,filters
 from django.urls import reverse_lazy
-from rest_framework.decorators import api_view
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
 
 class PetListCreate(generics.ListCreateAPIView):
     queryset = Pet.objects.all()
@@ -58,14 +60,23 @@ def view_adoption_status(request, pet_id):
         return Response({'error': 'Adoption request not found'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['DELETE'])
-def withdraw_adoption_request(request,pet_id):
-    adoption_request = Adoption.objects.filter(user=user, pet=pet, status='pending').first()
-    if not adoption_request:
+@permission_classes([IsAuthenticated])
+# 已认证
+def withdraw_adoption_request(request, pet_id):
+    user = request.user
+
+    # pet_id获取Pet对象
+    try:
+        pet = Pet.objects.get(id=pet_id)
+    except Pet.DoesNotExist:
+        return Response({'error': 'Pet not found'}, status=status.HTTP_404_NOT_FOUND)
+    try:
+        adoption_request = Adoption.objects.get(user=user, pet=pet, status='pending')
+    except Adoption.DoesNotExist:
         return Response({'error': 'Adoption request not found or already processed'}, status=status.HTTP_404_NOT_FOUND)
 
     adoption_request.delete()
-    return Response({'message': 'Adoption request successfully withdrawn'})
-
+    return Response(status=status.HTTP_204_NO_CONTENT)
 class ProjectListView(APIView):
     def get(self, request):
         projects = Project.objects.all()
