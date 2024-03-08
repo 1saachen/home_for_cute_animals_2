@@ -8,8 +8,8 @@ def wechat_login(request):
     if not code:
         return JsonResponse({'error': '缺少 code 参数'}, status=400)
 
-    appid = 'your_appid'
-    secret = 'your_secret'
+    appid = 'wx16afb46c6068a4dd'
+    secret = '65bc34bcd1df8bfdd73de1bd1fae31ab'
     url = f'https://api.weixin.qq.com/sns/jscode2session?appid={appid}&secret={secret}&js_code={code}&grant_type=authorization_code'
 
     try:
