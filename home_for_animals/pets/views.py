@@ -14,7 +14,7 @@ class PetListCreate(generics.ListCreateAPIView):
     queryset = Pet.objects.all()
     serializer_class = PetSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    search_fields = ['name', 'breed', 'region']
+    search_fields = ['name', 'breed', 'position']
 
 
 class PetDetailUpdate(generics.RetrieveUpdateAPIView):
@@ -25,7 +25,7 @@ class PetDetailUpdate(generics.RetrieveUpdateAPIView):
 class PetDelete(generics.DestroyAPIView):
     queryset = Pet.objects.all()
     serializer_class = PetSerializer
-    success_url = reverse_lazy('pet_list')  # 注意：在 DRF 中通常不直接使用 `success_url`
+    success_url = reverse_lazy('pet_list')
 
 
 @api_view(['POST'])
