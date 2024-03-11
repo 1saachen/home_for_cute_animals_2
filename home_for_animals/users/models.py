@@ -95,11 +95,21 @@ class DonationRecord(models.Model):
     捐赠记录
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project_title = models.CharField(max_length=255, blank=True, null=True)
+    donation_date = models.DateTimeField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    donation_date = models.DateField()
-
+    status = models.CharField(
+        max_length=20,
+        choices=(
+            ('completed', '捐赠成功'),
+            ('failed', '捐赠失败'),
+            ('processing', '处理中')
+        ),
+        default='processing'
+    )
     def __str__(self):
-        return f"{self.user.username} - ${self.amount}"
+        return f"{self.user.username} - {self.project_title} - ${self.amount} - {self.get_status_display()}"
+
 
 # class ChatMessage(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chat_messages')

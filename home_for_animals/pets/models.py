@@ -14,14 +14,15 @@ class Pet(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     ]
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES,default='Unknown')
     position = models.CharField(max_length=100, choices=DISTRIBUTION_CHOICE, default='Unknown')
-    feature = models.TextField()
-    range = models.CharField(max_length=100)
-    personality = models.TextField()
+    feature = models.CharField(max_length=20, blank=True, null=True)
+    range = models.CharField(max_length=100, blank=True, null=True)
+    personality = models.CharField(max_length=100, blank=True, null=True)
     sterilization = models.BooleanField(default=False)
     health = models.CharField(max_length=100)
-    other = models.TextField()
+    other = models.CharField(max_length=100, blank=True, null=True)
+    #限制字数备注
     image = models.ImageField(upload_to='pets_avatars/', null=True, blank=True)
 
 
