@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/home_for_animals" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/djangoblog" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.11 (home_for_cute_animals) (3)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
