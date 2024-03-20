@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import PetListCreate, PetDetailUpdate, PetDelete
-from .views import submit_adoption_request, view_adoption_status
+from .views import submit_adoption_request, view_adoption_status,approve_adoption_request,SelectedAnimalsDetailView
 from .views import ProjectListView, DonationCreateView, AccountingListView
 
 urlpatterns = [
@@ -12,4 +12,8 @@ urlpatterns = [
     path('projects/', ProjectListView.as_view(), name='project-list'),
     path('donate/', DonationCreateView.as_view(), name='donate'),
     path('accounting/', AccountingListView.as_view(), name='accounting'),
+    path('selected_animals/<int:pk>/', SelectedAnimalsDetailView.as_view(), name='selected_animals_detail'),
+    path('select/<int:pet_id>/adopt',approve_adoption_request,name='approve_adoption_request')
 ]
+
+

@@ -4,7 +4,7 @@ from .views import UserViewSet
 # from .views import contact_view, feedback_view
 
 router = DefaultRouter()
-router.register(r'users', UserViewSet, basename='user')
+router.register(r'user', UserViewSet, basename='user')
 
 urlpatterns = [
     path('user/', include(router.urls)),
@@ -21,6 +21,6 @@ urlpatterns = [
          UserViewSet.as_view({'get': 'donation_records'}),
          name='donation_records'),
 
-    # path('api/contact/', contact_view.as_view(), name='contact'),
-    # path('api/feedback/', feedback_view.as_view(), name='feedback'),
+    # path('contact/', contact_view.as_view(), name='contact'),
+    # path('feedback/', feedback_view.as_view(), name='feedback'),
 ]

@@ -19,6 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
+    path('user/',include('users.urls')),
     path('pets/', include('pets.urls')),  # 包含 pets 应用的 urls.py 文件
     path('UserRegister/', include('UserRegister.urls')),  # 使用UserRegister应用中的UserRegister视图函数
     path('wechat_login/',include('wechat_login.urls') ),  # 使用UserRegister应用中的wechat_login视图函数

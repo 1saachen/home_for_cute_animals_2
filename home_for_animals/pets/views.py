@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import F
 from .models import Pet,Adoption,Project,Accounting,SelectedAnimals
-from .serializers import PetSerializer,AdoptionSerializer,DonationSerializer,AccountingSerializer,ProjectSerializer
+from .serializers import (PetSerializer,AdoptionSerializer,SelectedAnimalsSerializer,
+                          DonationSerializer,AccountingSerializer,ProjectSerializer)
 from rest_framework import generics,filters
 from django.urls import reverse_lazy
 from django_filters.rest_framework import DjangoFilterBackend
@@ -76,6 +77,11 @@ def withdraw_adoption_request(request, pet_id):
     adoption_request.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+class SelectedAnimalsDetailView(generics.RetrieveAPIView):
+    queryset = SelectedAnimals.objects.all()
+    serializer_class = SelectedAnimalsSerializer
+    lookup_field = 'pet_id'
+#
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
 def approve_adoption_request(request, adoption_id):
