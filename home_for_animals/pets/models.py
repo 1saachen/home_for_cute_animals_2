@@ -3,7 +3,6 @@ from django.conf import settings
 from django.utils import timezone
 class Pet(models.Model):
     name = models.CharField(max_length=100)
-    breed = models.CharField(max_length=100)
     DISTRIBUTION_CHOICE = [
         ('W', '文理学部'),
         ('G', '工学部'),
@@ -14,18 +13,39 @@ class Pet(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     ]
+    CONDITION_CHOICES =[
+        ('X','在校'),
+        ('L','被领养'),
+        ('M','喵星'),
+    ]
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES,default='Unknown')
+    breed = models.CharField(max_length=100)
+    status = models.CharField(max_length=20,blank=True,null=True)
+    condition = models.CharField(max_length=1,choices=CONDITION_CHOICES,default='Unknown')
     position = models.CharField(max_length=100, choices=DISTRIBUTION_CHOICE, default='Unknown')
     feature = models.CharField(max_length=20, blank=True, null=True)
     range = models.CharField(max_length=100, blank=True, null=True)
     personality = models.CharField(max_length=100, blank=True, null=True)
     sterilization = models.BooleanField(default=False)
     health = models.CharField(max_length=100)
+    social = models.CharField(max_length=100,blank=True,null=True)
     other = models.CharField(max_length=100, blank=True, null=True)
-    #限制字数备注
     image = models.ImageField(upload_to='pets_avatars/', null=True, blank=True)
 
 
+class SelectedAnimals(models.Model):
+    """
+    待领养宠物信息
+    """
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='selected_animals')
+    date = models.DateField()
+    status = models.CharField(max_length=20, blank=True, null=True)
+    applications = models.IntegerField(default=0)  #
+    #申请人数
+    requirements = models.TextField()
+
+    def __str__(self):
+        return f"{self.pet.name} "
 
 class Adoption(models.Model):
     pet = models.ForeignKey(Pet, related_name='adoptions', on_delete=models.CASCADE)

@@ -20,3 +20,12 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+docker run -it --network=traefik \
+--label "traefik.enable=true" \
+--label "traefik.http.routers.home_for_animals.rule=Host(\'api.zq_strayanimals.ziqiang.net.cn\')" \
+--label "traefik.http.routers.home_for_animals.entrypoints=websecure" \
+--label "traefik.http.services.home_for_animals.loadbalancer.server.port=8083" \
+--name zq_strayanimals home_for_cute_animals
+"""
