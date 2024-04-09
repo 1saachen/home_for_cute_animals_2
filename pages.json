@@ -1,0 +1,176 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/discovery/discovery",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/index/Profile",
+			"style": {
+				"navigationBarTitleText": "首页界面"
+			}
+		},
+		{
+			"path": "pages/index/Login/login",
+			"style": {
+				"navigationBarTitleText": "登录界面"
+			}
+		},
+		{
+			"path": "pages/index/Login/authorization",
+			"style": {
+				"navigationBarTitleText": "授权界面"
+			}
+		},
+		{
+			"path": "pages/index/Profile/detail1",
+			"style": {
+				"navigationBarTitleText": "详细页面"
+			}
+		},
+		{
+			"path": "pages/index/Adoption/adoptiondetail",
+			"style": {
+				"navigationBarTitleText": "领养详情"
+			}
+		},
+		{
+			"path": "pages/index/Adoption/application",
+			"style": {
+				"navigationBarTitleText": "填写申请"
+			}
+		},
+		{
+			"path": "pages/index/Donation/donationdetail",
+			"style": {
+				"navigationBarTitleText": "募捐详情"
+			}
+		},
+		{
+			"path": "pages/index/Donation/pay",
+			"style": {
+				"navigationBarTitleText": "捐款页面"
+			}
+		},
+		{
+			"path": "pages/index/Adoption/success",
+			"style": {
+				"navigationBarTitleText": "操作成功"
+			}
+		},
+		{
+			"path": "pages/index/Profile/search",
+			"style": {
+				"navigationBarTitleText": "搜索页面"
+			}
+		},
+		{
+			"path": "pages/index/Adoption",
+			"style": {
+				"navigationBarTitleText": "萌物领养"
+			}
+		},
+		{
+			"path": "pages/index/Volunteer",
+			"style": {
+				"navigationBarTitleText": "志愿记录"
+			}
+		},
+		{
+			"path": "pages/index/Donation",
+			"style": {
+				"navigationBarTitleText": "萌物募捐"
+			}
+		},
+		{
+			"path": "pages/profile/personalCenter/personalCenter",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/profile/contactUs/contactUs",
+			"style": {
+				"navigationBarTitleText": "联系我们"
+			}
+		},
+		{
+			"path": "pages/profile/adoptionApplications/adoptionApplications",
+			"style": {
+				"navigationBarTitleText": "领养申请"
+			}
+		},
+		{
+			"path": "pages/profile/donationRecords/donationRecords",
+			"style": {
+				"navigationBarTitleText": "捐赠记录"
+			}
+		},
+		{
+			"path": "pages/profile/messages/messages",
+			"style": {
+				"navigationBarTitleText": "我的消息"
+			}
+		},
+		{
+			"path": "pages/profile/volunteerRecord/volunteerRecord",
+			"style": {
+				"navigationBarTitleText": "志愿记录"
+			}
+		},
+		{
+			"path": "pages/profile/reportProblem/reportProblem",
+			"style": {
+				"navigationBarTitleText": "问题反馈"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "萌物有珈",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+	},
+	"tabBar": {
+		"color": "#999",
+		"selectedColor": "#FE9900",
+		"backgroundColor": "#FBDE95",
+		"borderStyle": "black",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/brownshouye.png",
+				"selectedIconPath": "static/orangeshouye.png"
+			},
+			{
+				"pagePath": "pages/discovery/discovery",
+				"text": "发现",
+				"iconPath": "static/brownfaxian.png",
+				"selectedIconPath": "static/orangefaxian.png"
+			},
+			{
+				"pagePath": "pages/profile/profile",
+				"text": "我的",
+				"iconPath": "static/brownwode.png",
+				"selectedIconPath": "static/orangewode.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}
